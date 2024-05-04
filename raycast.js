@@ -36,7 +36,21 @@ class Map {
   }
 }
 
+class Player {
+  constructor() {
+    this.color = "#00f";
+    this.radius = TILE_SIZE / 6;
+  }
+
+  render() {
+    stroke(this.color);
+    fill(this.color);
+    circle(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, this.radius);
+  }
+}
+
 var grid = new Map();
+var player = new Player();
 
 function setup() {
   createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -47,5 +61,7 @@ function update() {
 
 function draw() {
   update();
+
   grid.render();
+  player.render();
 }
