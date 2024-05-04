@@ -58,17 +58,31 @@ class Player {
     line(
       this.x,
       this.y,
-      this.x + Math.cos(this.facingAngle) * TILE_SIZE,
-      this.y + Math.sin(this.facingAngle) * TILE_SIZE,
+      this.x + Math.cos(this.facingAngle) * 3 * this.radius,
+      this.y + Math.sin(this.facingAngle) * 3 * this.radius,
     )
   }
 
   update() {
     this.facingAngle += this.rotationSpeed * this.facingDirection;
 
-    this.x += PLAYER_SPEED * this.walkingDirection * cos(this.facingAngle);
-    this.y += PLAYER_SPEED * this.walkingDirection * sin(this.facingAngle);
+    let xAngleMultiplier = Math.cos(this.facingAngle) < 0 ? -1 : 1;
+    let yAngleMultiplier = Math.sin(this.facingAngle) < 0 ? -1 : 1;
+    let nextX = this.x + this.radius * xAngleMultiplier;
+    let nextY = this.y + this.radius * yAngleMultiplier;
+
+    if (!isTileWall(nextX, nextY)) {
+      this.x += PLAYER_SPEED * this.walkingDirection * cos(this.facingAngle);
+      this.y += PLAYER_SPEED * this.walkingDirection * sin(this.facingAngle);
+    }
   }
+}
+
+function isTileWall(x, y) {
+  let column = Math.floor(x / TILE_SIZE);
+  let row = Math.floor(y / TILE_SIZE);
+
+  return grid.grid[row][column];
 }
 
 var grid = new Map();
