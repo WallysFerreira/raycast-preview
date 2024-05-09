@@ -26,7 +26,7 @@ class Player {
     let clippedAngle = this.facingAngle % (2 * Math.PI);
 
     for (let i = clippedAngle - deg2rad(FOV / 2); i <= clippedAngle + deg2rad(FOV / 2); i += DISTANCE_BETWEEN_RAYS) {
-      for (let j = 0; j < TILE_SIZE * GRID_NUM_COLS; j += RAY_COLISION_CHECK_DISTANCE) {
+      for (let j = 0; j < TILE_SIZE * GRID_NUM_COLS * GRID_NUM_ROWS; j += RAY_COLISION_CHECK_DISTANCE) {
         let possibleX = this.x + Math.cos(i) * j;
         let possibleY = this.y + Math.sin(i) * j;
 
