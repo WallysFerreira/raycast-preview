@@ -3,6 +3,11 @@ document.onreadystatechange = function () {
         document.getElementById("tileSize").addEventListener("change", updateCanvas);
         document.getElementById("rowsQnt").addEventListener("change", updateCanvas);
         document.getElementById("colsQnt").addEventListener("change", updateCanvas);
+        /*
+        document.getElementById("generateButton").addEventListener("click", (e) => {
+            window.location.href("preview.html");
+        });
+        */
     }
 }
 
@@ -56,6 +61,8 @@ function updateGrid(colsQnt, rowsQnt) {
             grid[i][j] = i == 0 || i == rowsQnt - 1 || j == 0 || j == colsQnt - 1 ? 1 : 0;
         }
     }
+
+    localStorage.setItem('grid', JSON.stringify(grid));
 }
 
 function mouseClicked() {
@@ -64,4 +71,5 @@ function mouseClicked() {
     let gridY = Math.floor(mouseY / tileSize);
 
     grid[gridY][gridX] = grid[gridY][gridX] == 0 ? 1 : 0;
+    localStorage.setItem('grid', JSON.stringify(grid));
 }

@@ -5,7 +5,7 @@ function isTileWall(x, y) {
   return grid.grid[row][column];
 }
 
-var grid = new Map();
+var grid = new Map(JSON.parse(localStorage.getItem('grid')));
 var player = new Player();
 
 function setup() {
