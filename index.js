@@ -48,7 +48,9 @@ function updateCanvas(e) {
     }
 
     resizeCanvas(colsQnt * tileSize, rowsQnt * tileSize);
-
+    localStorage.setItem("tileSize", tileSize);
+    localStorage.setItem("rowsQnt", rowsQnt);
+    localStorage.setItem("colsQnt", colsQnt);
 }
 
 function updateGrid(colsQnt, rowsQnt) {
