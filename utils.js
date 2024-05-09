@@ -4,3 +4,7 @@ function isTileWall(x, y) {
 
   return grid.grid[row][column];
 }
+
+function deg2rad(degrees) {
+  return degrees * (Math.PI / 180);
+}

@@ -22,6 +22,18 @@ class Player {
       this.x + Math.cos(this.facingAngle) * 3 * this.radius,
       this.y + Math.sin(this.facingAngle) * 3 * this.radius,
     )
+
+    let clippedAngle = this.facingAngle % (2 * Math.PI);
+
+    for (let i = clippedAngle - deg2rad(45); i <= clippedAngle + deg2rad(45); i += Math.PI / 180) {
+      stroke("#0f0");
+      line(
+        this.x,
+        this.y,
+        this.x + Math.cos(i) * 10 * this.radius,
+        this.y + Math.sin(i) * 10 * this.radius,
+      );
+    }
   }
 
   update() {
