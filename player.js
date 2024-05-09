@@ -25,14 +25,23 @@ class Player {
 
     let clippedAngle = this.facingAngle % (2 * Math.PI);
 
-    for (let i = clippedAngle - deg2rad(45); i <= clippedAngle + deg2rad(45); i += Math.PI / 180) {
-      stroke("#0f0");
-      line(
-        this.x,
-        this.y,
-        this.x + Math.cos(i) * 10 * this.radius,
-        this.y + Math.sin(i) * 10 * this.radius,
-      );
+    for (let i = clippedAngle - deg2rad(FOV / 2); i <= clippedAngle + deg2rad(FOV / 2); i += DISTANCE_BETWEEN_RAYS) {
+      for (let j = 0; j < TILE_SIZE * GRID_NUM_COLS; j += RAY_COLISION_CHECK_DISTANCE) {
+        let possibleX = this.x + Math.cos(i) * j;
+        let possibleY = this.y + Math.sin(i) * j;
+
+        if (isTileWall(possibleX, possibleY)) {
+          stroke("#0f0");
+          line(
+            this.x,
+            this.y,
+            possibleX,
+            possibleY,
+          )
+
+          break;
+        }
+      }
     }
   }
 
